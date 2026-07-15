@@ -1,4 +1,4 @@
-# 📚 Bibliothèque Universitaire — Framework PHP Maison
+#  Bibliothèque Universitaire — Framework PHP Maison
 
 Mini-projet intégrateur PHP natif, conçu comme un **mini-framework MVC** avec ORM maison,
 annotations, middleware d'auth et composants front à la Angular. Base de données hébergée
@@ -12,7 +12,7 @@ sur **Render** (accessible à toute l'équipe).
 
 | Membre | Rôle | Dossier(s) sous sa responsabilité |
 |---|---|---|
-| **Marc (toi)** | Architecte logiciel, gestion Git, QA code | `core/`, revue de tout le dépôt |
+| **Marc** | Architecte logiciel, gestion Git, QA code | `core/`, revue de tout le dépôt |
 | **ADAMOU Youssouf** | BD & ORM | `orm/` |
 | **BARESSEY** | Dev Frontend | `frontend/` |
 | **LeBonheur** | Dev Backend | `backend/` |

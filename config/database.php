@@ -1,6 +1,7 @@
 <?php
 
 /**
+
  * Fichier de connexion à la base de données.
  *
  * Ce script initialise une connexion PDO sécurisée vers la base de données

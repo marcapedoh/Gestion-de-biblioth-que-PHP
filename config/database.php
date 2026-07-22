@@ -1,47 +1,53 @@
 <?php
 
 /**
- * config/database.php
+
+ * Fichier de connexion à la base de données.
  *
- * Connexion PDO à la base de données, en PHP procédural (pas de classe,
- * conformément à la consigne du groupe).
- *
- * getConnexionPDO() renvoie toujours LA MÊME connexion grâce à une
- * variable "static" à l'intérieur de la fonction : ça évite d'ouvrir
- * plusieurs connexions inutiles, sans avoir besoin d'un singleton en POO.
- *
- * Les identifiants viennent des variables d'environnement (.env, jamais
- * commité). Voir .env.example à la racine du projet.
+ * Ce script initialise une connexion PDO sécurisée vers la base de données
+ * en utilisant les identifiants définis dans le fichier de configuration.
  */
 
-function getConnexionPDO(): PDO
-{
-    static $pdo = null;
+// Inclusion du fichier de configuration contenant les constantes
+// de connexion (HOST, DB, USER, PASSWORD).
+require_once "config.php";
 
-    if ($pdo === null) {
-        $driver   = getenv('DB_DRIVER')   ?: 'pgsql';
-        $host     = getenv('DB_HOST')     ?: '127.0.0.1';
-        $port     = getenv('DB_PORT')     ?: '5432';
-        $database = getenv('DB_DATABASE') ?: 'bibliotheque';
-        $username = getenv('DB_USERNAME') ?: 'postgres';
-        $password = getenv('DB_PASSWORD') ?: '';
+try {
 
-        // Le format du DSN diffère entre PostgreSQL et MySQL
-        $dsn = ($driver === 'pgsql')
-            ? "pgsql:host={$host};port={$port};dbname={$database}"
-            : "mysql:host={$host};port={$port};dbname={$database};charset=utf8mb4";
+    /**
+     * Création d'une nouvelle instance PDO pour se connecter à la base
+     * de données MySQL avec le jeu de caractères UTF-8.
+     *
+     * Options PDO utilisées :
+     * - PDO::ATTR_ERRMODE            : active le mode exception pour la gestion des erreurs.
+     * - PDO::ATTR_DEFAULT_FETCH_MODE : définit le mode de récupération par défaut (tableau associatif).
+     * - PDO::ATTR_EMULATE_PREPARES   : désactive l'émulation des requêtes préparées
+     *                                  pour utiliser les vraies requêtes préparées côté serveur
+     *                                  (meilleure sécurité contre les injections SQL).
+     */
+    $pdo = new PDO(
+        "mysql:host=" . HOST . ";dbname=" . DB . ";charset=utf8",
+        USER,
+        PASSWORD,
+        [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ]
+    );
 
-        try {
-            $pdo = new PDO($dsn, $username, $password, [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES    => false,
-            ]);
-        } catch (PDOException $e) {
-            // On ne révèle jamais les identifiants dans le message d'erreur
-            die('Connexion à la base de données impossible. Vérifiez le fichier .env.');
-        }
-    }
+} catch (PDOException $e) {
 
-    return $pdo;
+    /**
+     * En cas d'échec de connexion, on interrompt l'exécution du script
+     * et on affiche un message d'erreur explicite.
+     *
+     * Remarque sécurité :
+     * En environnement de production, il est déconseillé d'afficher
+     * directement $e->getMessage() à l'utilisateur final (risque de fuite
+     * d'informations sensibles sur la configuration serveur).
+     * Il est préférable de logger l'erreur et d'afficher un message générique.
+     */
+    die("Erreur de connexion à la base de données : " . $e->getMessage());
+
 }

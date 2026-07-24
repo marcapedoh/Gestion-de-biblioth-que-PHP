@@ -23,7 +23,7 @@ define('RESULTATS_PAR_PAGE', 10);
 // Exemple : si le projet est accessible via http://localhost/bibliotheque/,
 // laissez '/bibliotheque/'. Utilisée pour que les liens et redirections
 // fonctionnent depuis n'importe quel sous-dossier (views/livres, etc.).
-define('BASE_URL', '/');
+define('BASE_URL', '/bibliotheque/');
 
 // Bonus : upload des couvertures de livres
 // Chemin absolu sur le disque (pour move_uploaded_file) et URL publique (pour <img src="">)

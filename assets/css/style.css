@@ -950,6 +950,8 @@ table th, table td, .table th, .table td {
 
 @media (max-width: 575.98px) {
     .stat-carte .stat-valeur { font-size: 1.35rem; }
+    .stat-carte .card-body { padding: 0.85rem 0.9rem; gap: 0.4rem; }
+    .stat-carte .stat-icone { font-size: 1.3em; }
     .page-conteneur { padding: 22px 12px 42px; }
 }
 /*```[cite: 7]

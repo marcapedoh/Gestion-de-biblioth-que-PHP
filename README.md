@@ -42,6 +42,7 @@ interface Bootstrap et journalisation).
 
 - **Email :** admin@bibliotheque.com — **Mot de passe :** admin123
 - **Email :** lebonheur@bibliotheque.com — **Mot de passe :** admin123
+- **Email :** dglibrary@bibliotheque.com — **Mot de passe :** admin123
 
 ## Structure du projet
 

@@ -26,7 +26,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.
     define('DB_HOST', 'sql202.infinityfree.com');
     define('DB_NAME', 'if0_42484346_depot');
     define('DB_USER', 'if0_42484346');
-    define('DB_PASS', 'uV9%ass*LQ$quK6');
+    define('DB_PASS', 'xmFTQrYp2r2ye');
     define('BASE_URL', '/');
     
     // Erreurs masquées en production pour la sécurité
